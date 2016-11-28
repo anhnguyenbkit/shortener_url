@@ -12,6 +12,12 @@ class ShortenersController < ApplicationController
   def show
   end
 
+  def show_link
+    @shortener = Shortener.find_by short_url: params[:short_url]
+    Shortener.update(@shortener.id, :num_click => (@shortener.num_click + 1))
+    redirect_to @shortener.long_url
+  end
+
   # GET /shorteners/new
   def new
     @shortener = Shortener.new
@@ -28,8 +34,11 @@ class ShortenersController < ApplicationController
 
     respond_to do |format|
       if @shortener.save
-        format.html { redirect_to @shortener, notice: 'Shortener was successfully created.' }
+        format.html { redirect_to shorteners_path, notice: 'Shortener was successfully created.' }
         format.json { render :show, status: :created, location: @shortener }
+
+        encode_url = bijective_encode
+        Shortener.update(@shortener.id, :short_url => encode_url, :num_click => 0)
       else
         format.html { render :new }
         format.json { render json: @shortener.errors, status: :unprocessable_entity }

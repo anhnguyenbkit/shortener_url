@@ -1,33 +1,65 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Shorteners</h1>
+<div class="main">
+  <div class="shorten header">
+    <div class="constrain">
+      <h1>Simplify your links</h1>
+      <div class="container row">
+        <div class="input-container col-lg-12 col-md-12 col-xs-12">
+          <div class="input-group custom-search-form">
+            <%= form_for(Shortener.new) do |f| %>
+              <% if Shortener.new.errors.any? %>
+                <div id="error_explanation">
+                  <h2><%= pluralize(Shortener.new.errors.count, "error") %> prohibited this shortener from being saved:</h2>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Long url</th>
-      <th>Short url</th>
-      <th>Num click</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+                  <ul>
+                  <% Shortener.new.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                  <% end %>
+                  </ul>
+                </div>
+              <% end %>
 
-  <tbody>
-    <% @shorteners.each do |shortener| %>
-      <tr>
-        <td><%= shortener.title %></td>
-        <td><%= shortener.long_url %></td>
-        <td><%= shortener.short_url %></td>
-        <td><%= shortener.num_click %></td>
-        <td><%= link_to 'Show', shortener %></td>
-        <td><%= link_to 'Edit', edit_shortener_path(shortener) %></td>
-        <td><%= link_to 'Destroy', shortener, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+              <%= f.text_field :long_url, id: "search", placeholder: "Your original URL here" %>
+              <%= f.submit "GO", id: "submit"%>
+              
+            <% end %> 
+          </div><!-- /input-group -->
+        </div>
+      </div>
+    </div>
+  </div>
 
-<br>
 
-<%= link_to 'New Shortener', new_shortener_path %>
+  <div class="shorten content constrain">
+    <div class="table-responsive">
+      <table class="table table-bordred table-striped">
+        <thead>
+          <tr>
+            <th>Original URL</th>
+            <th>Short URL</th>
+            <th>All clicks</th>
+            <th>Expiration</th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @shorteners.each do |shortener| %>
+            <% if true %>
+              <tr>
+                <td data-no-turbolink><%= link_to "#{shortener.long_url}", shortener.long_url %></td>
+                <td data-no-turbolink><%= link_to "#{get_hostname}#{shortener.short_url}", "#{get_hostname}#{shortener.short_url}" %></td>
+                <td><%= shortener.num_click %></td>
+                <td><%= shortener.expiration.in_time_zone('Hanoi').strftime("at %Y:%m:%d %I:%M%p") %></td>
+                <td><%= link_to 'Show', shortener %></td>
+                <td><%= link_to 'Edit', edit_shortener_path(shortener) %></td>
+                <td><%= link_to 'Destroy', shortener, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
