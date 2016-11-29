@@ -1,5 +1,11 @@
 <p id="notice"><%= notice %></p>
-
+<div id="modal-window" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <%= yield %>
+    </div>
+  </div>
+</div>
 <div class="main">
   <div class="shorten header">
     <div class="constrain">
@@ -7,7 +13,7 @@
       <div class="container row">
         <div class="input-container col-lg-12 col-md-12 col-xs-12">
           <div class="input-group custom-search-form">
-            <%= form_for(Shortener.new) do |f| %>
+            <%= form_for Shortener.new, :html => {:id => "new_short_url"} do |f| %>
               <% if Shortener.new.errors.any? %>
                 <div id="error_explanation">
                   <h2><%= pluralize(Shortener.new.errors.count, "error") %> prohibited this shortener from being saved:</h2>
@@ -62,4 +68,7 @@
       </table>
     </div>
   </div>
+
+
+  <%= link_to 'Add release', shorteners_new_release_path,  {:remote => true}  %>
 </div>

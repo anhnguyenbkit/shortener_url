@@ -18,6 +18,14 @@ class ShortenersController < ApplicationController
     redirect_to @shortener.long_url
   end
 
+  def new_release
+    puts "--------------> debug new_release"
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
   # GET /shorteners/new
   def new
     @shortener = Shortener.new
@@ -34,9 +42,9 @@ class ShortenersController < ApplicationController
 
     respond_to do |format|
       if @shortener.save
+        format.js
         format.html { redirect_to shorteners_path, notice: 'Shortener was successfully created.' }
-        format.json { render :show, status: :created, location: @shortener }
-
+        format.json { head :no_content }
         encode_url = bijective_encode
         Shortener.update(@shortener.id, :short_url => encode_url, :num_click => 0)
       else

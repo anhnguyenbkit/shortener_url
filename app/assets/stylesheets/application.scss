@@ -13,6 +13,7 @@
  */
 
 /* bootrap */
+@import "bootstrap-sprockets";
 @import "bootstrap";
 
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
@@ -41,6 +42,7 @@
 
 .custom-search-form {
   margin: 25px auto auto;
+  width: 100%;
 }
 
 .shorten.content {
