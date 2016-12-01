@@ -13,7 +13,7 @@
       <div class="container row">
         <div class="input-container col-lg-12 col-md-12 col-xs-12">
           <div class="input-group custom-search-form">
-            <%= form_for Shortener.new, :html => {:id => "new_short_url"} do |f| %>
+            <%= form_for Shortener.new, :html => {:id => "new_short_url",:remote =>true} do |f| %>
               <% if Shortener.new.errors.any? %>
                 <div id="error_explanation">
                   <h2><%= pluralize(Shortener.new.errors.count, "error") %> prohibited this shortener from being saved:</h2>
@@ -50,25 +50,11 @@
           </tr>
         </thead>
 
-        <tbody>
-          <% @shorteners.each do |shortener| %>
-            <% if true %>
-              <tr>
-                <td data-no-turbolink><%= link_to "#{shortener.long_url}", shortener.long_url %></td>
-                <td data-no-turbolink><%= link_to "#{get_hostname}#{shortener.short_url}", "#{get_hostname}#{shortener.short_url}" %></td>
-                <td><%= shortener.num_click %></td>
-                <td><%= shortener.expiration.in_time_zone('Hanoi').strftime("at %Y:%m:%d %I:%M%p") %></td>
-                <td><%= link_to 'Show', shortener %></td>
-                <td><%= link_to 'Edit', edit_shortener_path(shortener) %></td>
-                <td><%= link_to 'Destroy', shortener, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-              </tr>
-            <% end %>
-          <% end %>
+        <tbody class="shortener-index">
+          <%= render "index" %>
         </tbody>
       </table>
     </div>
   </div>
-
-
-  <%= link_to 'Add release', shorteners_new_release_path,  {:remote => true}  %>
+  <div id="shortener-modal" class="modal fade"> </div>
 </div>

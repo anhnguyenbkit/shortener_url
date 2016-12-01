@@ -10,16 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161124102120) do
+ActiveRecord::Schema.define(version: 20161130091146) do
 
   create_table "shorteners", force: :cascade do |t|
     t.string   "title"
     t.string   "long_url"
     t.string   "short_url"
     t.integer  "num_click"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
     t.datetime "expiration"
+    t.string   "snapshot_file_name"
+    t.string   "snapshot_content_type"
+    t.integer  "snapshot_file_size"
+    t.datetime "snapshot_updated_at"
   end
 
 end

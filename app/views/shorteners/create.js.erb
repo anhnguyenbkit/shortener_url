@@ -1,1 +1,3 @@
-$('#modal-window').modal('toggle');
+$("#modal-window .modal-content").html("<%= j render 'shorteners/new_release' %>");
+$("#modal-window").modal();
+$(".shortener-index").html("<%= j render 'index' %>")
