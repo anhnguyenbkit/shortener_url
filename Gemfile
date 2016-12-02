@@ -62,3 +62,9 @@ gem "paperclip", "~> 5.0.0"
 
 ## Gemfile for Rails 3+, Sinatra, and Merb
 gem 'will_paginate', '~> 3.1.0'
+
+group :development, :test do
+  gem 'rspec-rails', '~> 3.5'
+end
+
+gem 'rails-controller-testing'

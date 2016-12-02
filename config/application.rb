@@ -12,6 +12,6 @@ module Shortenerurl
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
 
-    config.web_console.whitelisted_ips = '172.16.2.21'
+    # config.web_console.whitelisted_ips = '172.16.2.21'
   end
 end
