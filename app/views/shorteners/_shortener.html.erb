@@ -1,0 +1,9 @@
+<tr id="shortener_<%= shortener.id %>">
+  <td data-no-turbolink><%= link_to "#{shortener.long_url}", shortener.long_url %></td>
+  <td data-no-turbolink><%= link_to "#{get_hostname}#{shortener.short_url}", "#{get_hostname}#{shortener.short_url}" %></td>
+  <td><%= shortener.num_click %></td>
+  <td><%= (shortener.created_at + 1.hours).in_time_zone('Hanoi').strftime("at %Y:%m:%d %I:%M%p") %></td>
+  <td><%= link_to 'Show', shortener %></td>
+  <td><%= link_to 'Edit', edit_shortener_path(shortener) %></td>
+  <td><%= link_to 'Destroy', shortener, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+</tr>

@@ -59,3 +59,6 @@ gem 'bootstrap-sass', '~> 3.3.6'
 gem 'imgkit'
 
 gem "paperclip", "~> 5.0.0"
+
+## Gemfile for Rails 3+, Sinatra, and Merb
+gem 'will_paginate', '~> 3.1.0'

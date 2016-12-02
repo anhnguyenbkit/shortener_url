@@ -50,10 +50,11 @@
           </tr>
         </thead>
 
-        <tbody class="shortener-index">
-          <%= render "index" %>
+        <tbody id="shorteners">
+          <%= render @shorteners %>
         </tbody>
       </table>
+      <%= will_paginate @shorteners %>
     </div>
   </div>
   <div id="shortener-modal" class="modal fade"> </div>

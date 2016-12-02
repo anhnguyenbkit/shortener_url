@@ -1,3 +1,3 @@
-$("#modal-window .modal-content").html("<%= j render 'shorteners/new_release' %>");
+$("#modal-window .modal-content").html("<%= j render 'shorteners/dialog' %>");
 $("#modal-window").modal();
-$(".shortener-index").html("<%= j render 'index' %>")
+$("#shorteners").append('<%= j render (@shortener) %>')
